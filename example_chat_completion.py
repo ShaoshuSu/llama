@@ -7,6 +7,8 @@ import fire
 
 from llama import Llama, Dialog
 
+import os 
+import torch
 
 def main(
     ckpt_dir: str,
@@ -101,4 +103,9 @@ If a question does not make any sense, or is not factually coherent, explain why
 
 
 if __name__ == "__main__":
+    os.environ['PL_TORCH_DISTRIBUTED_BACKEND'] = 'gloo'
+    os.environ['NCCL_DEBUG'] = 'INFO'
+    torch.distributed.init_process_group(backend="gloo")
+    # torch.distributed.init_process_group("gloo")
+
     fire.Fire(main)

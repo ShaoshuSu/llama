@@ -8,20 +8,25 @@ import fire
 from llama import Llama, Dialog
 
 
-import os
+# import os
 
-os.environ['MASTER_ADDR'] = 'localhost'
-os.environ['MASTER_PORT'] = '12356'
-os.environ['RANK'] = '0'
-os.environ['WORLD_SIZE'] = '1'
+# os.environ['MASTER_ADDR'] = 'localhost'
+# os.environ['MASTER_PORT'] = '12356'
+# os.environ['RANK'] = '0'
+# os.environ['WORLD_SIZE'] = '1'
 
 class LLAMA_Generation:
-    def __init__(self):
-        self.generator = Llama.build(
+    def __init__(self,
         ckpt_dir='llama-2-7b-chat/',
         tokenizer_path='tokenizer.model',
         max_seq_len=512,
-        max_batch_size=8,
+        max_batch_size=8):
+
+        self.generator = Llama.build(
+        ckpt_dir=ckpt_dir,
+        tokenizer_path=tokenizer_path,
+        max_seq_len=max_seq_len,
+        max_batch_size=max_batch_size,
         )
         self.temperature = 0.6
         self.top_p = 0.9

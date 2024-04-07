@@ -87,6 +87,7 @@ class Llama:
             if model_parallel_size is None:
                 model_parallel_size = int(os.environ.get("WORLD_SIZE", 1))
             initialize_model_parallel(model_parallel_size)
+        model_parallel_size = int(os.environ.get("WORLD_SIZE", 1))
 
         local_rank = int(os.environ.get("LOCAL_RANK", 0))
         torch.cuda.set_device(local_rank)
